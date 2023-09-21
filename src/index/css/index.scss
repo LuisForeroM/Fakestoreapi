@@ -1,0 +1,67 @@
+/* Estilos generales para la página */
+.page {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .top_bar {
+    text-align: right;
+  }
+  
+  .user_icon {
+    display: inline-block;
+    background-color: #ccc;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+  }
+  
+  .page_content {
+    margin-top: 20px;
+  }
+  
+  .product_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .product_box {
+    width: 30%; /* Ajusta el ancho según tus necesidades */
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .product_box .product_image img {
+    max-width: 100%;
+  }
+  
+  .product_info {
+    margin-top: 10px;
+  }
+  
+  .product_name span {
+    font-weight: bold;
+  }
+  
+  .product_price span {
+    color: green;
+  }
+  
+  .load_more_button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .load_more_button:hover {
+    background-color: #0056b3;
+  }
+  
