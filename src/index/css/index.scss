@@ -1,4 +1,9 @@
 /* Estilos generales para la página */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+body, .page_content, .product_name, .product_price {
+    font-family: 'Poppins', sans-serif;
+  }
 .page {
     width: 80%;
     margin: 0 auto;
@@ -63,5 +68,9 @@
   
   .load_more_button:hover {
     background-color: #0056b3;
+  }
+  .product_box .product_image img {
+    height: 400px; /* Establece la altura máxima que desees */
+    width: 100%; /* Ajusta el ancho al contenedor */
   }
   
