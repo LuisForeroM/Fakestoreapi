@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StoreService from '../services/fakestoreapi';
 import './css/index.scss';
-import { FaReply, FaUndo } from 'react-icons/fa';
+import { FaChevronDown, FaReply, FaTimes } from 'react-icons/fa';
 const storeService = new StoreService();
 
 function Principal() {
@@ -12,10 +12,15 @@ function Principal() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showProductDetails, setShowProductDetails] = useState(false);
   const [cartshowing, setCartsShowing] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // Nuevo estado para el carrito
+  const [cartItems, setCartItems] = useState([]);
   const maxProductsCount = 20;
   const userId = 8;
 
+  const handleRemoveItem = (itemId) => {
+    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+  };
   const handleProductClick = (productId) => {
     const product = products.find((product) => product.id === productId);
     setSelectedProduct(product);
@@ -27,16 +32,23 @@ function Principal() {
     setSelectedProduct(null);
     setCartsShowing(false);
   };
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+  const total = calculateTotal();
 
   const handleAddToCart = () => {
+    const updatedCartItems = [...cartItems];
+    const existingCartItemIndex = updatedCartItems.findIndex(item => item.id === selectedProduct.id);
 
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    if (existingCartItemIndex !== -1) {
+      updatedCartItems[existingCartItemIndex].quantity += 1;
+    } else {
+      updatedCartItems.push({ ...selectedProduct, quantity: 1 });
+    }
 
-
-    cartItems.push(selectedProduct);
-
-
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     alert('Producto añadido al carrito');
   };
 
@@ -84,18 +96,23 @@ function Principal() {
     if (showProductDetails && selectedProduct && !cartshowing) {
       return (
         <div className="page">
-          <div className="top_bar">
-            <button className="cart_button" onClick={handleShowCart}>
-              Carrito
-            </button>
-            <div className="user_icon">
-              <span>
-                {firstNameInitial}
-                {lastNameInitial}
-              </span>
+          <nav class="navbar">
+            <div className="navbar_left">
+              <h2>Ecommerce</h2>
             </div>
+            <div className="top_bar">
+              <button className="cart_button" onClick={handleShowCart}>
+                Carrito
+              </button>
 
-          </div>
+              <div className="user_icon">
+                <span>
+                  {firstNameInitial}
+                  {lastNameInitial}
+                </span>
+              </div>
+            </div>
+          </nav>
           <button className="back_button" onClick={handleGoBack}>
             <FaReply /> Volver
           </button>
@@ -122,51 +139,67 @@ function Principal() {
               Añadir al carrito
             </button>
           </div>
-
         </div>
       );
     } else if (cartshowing) {
       return (
         <div className="page">
-          <div className="top_bar">
-            <button className="cart_button" onClick={handleShowCart}>
-              Carrito
-
-            </button>
-
-            <div className="user_icon">
-              <span>
-                {firstNameInitial}
-                {lastNameInitial}
-              </span>
+          <nav class="navbar">
+            <div className="navbar_left">
+              <h2>Ecommerce</h2>
             </div>
+            <div className="top_bar">
+              <button className="cart_button" onClick={handleShowCart}>
+                Carrito
+              </button>
 
-          </div>
+              <div className="user_icon">
+                <span>
+                  {firstNameInitial}
+                  {lastNameInitial}
+                </span>
+              </div>
+            </div>
+          </nav>
           <button className="back_button" onClick={handleGoBack}>
             <FaReply /> Volver
           </button>
           <div className="cart_content">
-            <h2>Contenido del carrito:</h2>
+            <h2 class="cart_title">Contenido del carrito:</h2>
             <ul>
               <table class="cart_table">
                 <thead>
-
+                  <td>Eliminar Producto</td>
                   <td>Producto</td>
-                  <td>Precio</td>
+                  <td>Precio unitario</td>
+                  <td>Cantidad</td>
+                  <td>Precio total</td>
 
                 </thead>
-                {cartItems.map((item, index) => (
+                {cartItems.map((item) => (
+                  <tbody key={item.id}>
+                    <tr>
+                      <td>
+                        <button class="cart_remove" onClick={() => handleRemoveItem(item.id)}><FaTimes></FaTimes></button>
+                      </td>
+                      <td>
+                        <img className="cart_image" src={item.image} alt={item.title} />
+                        {item.title}
+                      </td>
+                      <td>${item.price}</td>
+                      <td>{item.quantity}</td>
+                      <td>${item.price * item.quantity}</td>
 
-
-                  <tbody>
-                    <tr key={index}>
-                      <td> <img class="cart_image" src={item.image} alt={item.title} />{item.title}</td>
-                      <td>{item.price}</td>
                     </tr>
                   </tbody>
-                
+                ))}
 
-              ))}
+                <tfoot>
+                  <tr>
+                    <td colSpan="4">Total</td>
+                    <td>${total}</td>
+                  </tr>
+                </tfoot>
               </table>
             </ul>
           </div>
@@ -177,19 +210,23 @@ function Principal() {
 
     return (
       <div className="page">
-        <div className="top_bar">
-          <button className="cart_button" onClick={handleShowCart}>
-            Carrito
-          </button>
-          <div className="user_icon">
-            <span>
-              {firstNameInitial}
-              {lastNameInitial}
-            </span>
+        <nav class="navbar">
+          <div className="navbar_left">
+            <h2>Ecommerce</h2>
           </div>
+          <div className="top_bar">
+            <button className="cart_button" onClick={handleShowCart}>
+              Carrito
+            </button>
 
-        </div>
-
+            <div className="user_icon">
+              <span>
+                {firstNameInitial}
+                {lastNameInitial}
+              </span>
+            </div>
+          </div>
+        </nav>
         <div className="page_content">
           <div className="product_list">
             {products.slice(0, productsToShow).map((product) => (
@@ -214,7 +251,7 @@ function Principal() {
         <div className="bottom_area">
           {productsToShow < maxProductsCount && (
             <button className="load_more_button" onClick={showMoreProducts}>
-              Ver mas
+              <FaChevronDown></FaChevronDown>
             </button>
           )}
         </div>
