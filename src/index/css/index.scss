@@ -1,76 +1,206 @@
 /* Estilos generales para la página */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-body, .page_content, .product_name, .product_price {
-    font-family: 'Poppins', sans-serif;
-  }
+
+body,
+.page_content,
+.product_name,
+.product_price {
+  font-family: 'Poppins', sans-serif;
+
+}
+
 .page {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-  }
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
   
-  .top_bar {
-    text-align: right;
-  }
+}
+
+.top_bar {
+  text-align: right;
+}
+
+.user_icon {
+  display: inline-block;
+  background-color: #ccc;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.page_content {
+  margin-top: 20px;
+}
+
+.product_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.product_box {
+  width: 30%;
+ 
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.product_box .product_image img {
+  max-width: 100%;
+}
+
+.product_info {
+  margin-top: 10px;
+}
+
+.product_name span {
+  font-weight: bold;
+}
+
+.product_price span {
+  color: green;
+}
+
+.load_more_button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.load_more_button:hover {
+  background-color: #0056b3;
+}
+
+.product_box .product_image img {
+  height: 400px;
   
-  .user_icon {
-    display: inline-block;
-    background-color: #ccc;
-    color: #fff;
-    padding: 10px;
-    border-radius: 50%;
-  }
-  
-  .page_content {
-    margin-top: 20px;
-  }
-  
-  .product_list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .product_box {
-    width: 30%; /* Ajusta el ancho según tus necesidades */
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  
-  .product_box .product_image img {
-    max-width: 100%;
-  }
-  
-  .product_info {
-    margin-top: 10px;
-  }
-  
-  .product_name span {
-    font-weight: bold;
-  }
-  
-  .product_price span {
-    color: green;
-  }
-  
-  .load_more_button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .load_more_button:hover {
-    background-color: #0056b3;
-  }
-  .product_box .product_image img {
-    height: 400px; /* Establece la altura máxima que desees */
-    width: 100%; /* Ajusta el ancho al contenedor */
-  }
-  
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card .product_image {
+  text-align: center;
+}
+
+.card .product_image img {
+  max-width: 100%;
+  max-height: 500px;
+}
+
+.card .product_info {
+  margin-top: 20px;
+}
+
+.card .product_info .product_name span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card .product_info .product_price span {
+  font-size: 18px;
+}
+
+.card .product_info .product_description span {
+  font-size: 14px;
+}
+
+
+.card .buy_button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card .buy_button:hover {
+  background-color: #0056b3;
+}
+
+.cart_button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007849;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  margin: 10px;
+}
+
+.cart_button:hover {
+  background-color: #218838;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  background-color: #fff;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  border-radius: 50px;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 70%;
+  /* Ancho de la primera columna */
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 30%;
+  /* Ancho de la segunda columna */
+}
+
+.cart_image {
+  height: 20px;
+  margin-right: 10px;
+}
+.back_button{
+  padding: 10px 20px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #ffce00;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  margin: 10px;
+}
+body {
+  background-color: #0375b4;
+}
+
+
